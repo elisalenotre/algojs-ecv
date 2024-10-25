@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CryptoJS from 'crypto-js';
 
 const App = () => {
   const [entries, setEntries] = useState<string[]>([]);

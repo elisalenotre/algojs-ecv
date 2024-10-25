@@ -35,8 +35,17 @@ textarea {
   border-radius: 4px;
 }
 
+input[type="password"] {
+  width: 20%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 button {
   padding: 10px 20px;
+  margin: 20px 0;
   font-size: 16px;
   color: white;
   background-color: #61dafb;

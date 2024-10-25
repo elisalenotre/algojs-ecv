@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import './App.css';
 
-function App() {
+const App = () => {
   const [entries, setEntries] = useState<string[]>([]);
   const [newEntry, setNewEntry] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const handleAddEntry = () => {
-    if (newEntry.trim()) {
-      setEntries([...entries, newEntry]);
+    if (newEntry && password) {
+      const encryptedEntry = CryptoJS.AES.encrypt(newEntry, password).toString();
+      setEntries([...entries, encryptedEntry]);
       setNewEntry('');
+      setPassword('');
+    } else {
+      alert('Veuillez saisir une entrée et un mot de passe.');
     }
   };
 
@@ -21,6 +25,12 @@ function App() {
           onChange={(e) => setNewEntry(e.target.value)}
           placeholder="Écris quelque chose..."
         />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Mot de passe"
+        />
         <button onClick={handleAddEntry}>Ajouter</button>
         <div className="entries">
           {entries.map((entry, index) => (
@@ -32,6 +42,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;

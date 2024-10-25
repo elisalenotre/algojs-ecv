@@ -1,23 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [entries, setEntries] = useState<string[]>([]);
+  const [newEntry, setNewEntry] = useState<string>('');
+
+  const handleAddEntry = () => {
+    if (newEntry.trim()) {
+      setEntries([...entries, newEntry]);
+      setNewEntry('');
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Mon Journal Intime</h1>
+        <textarea
+          value={newEntry}
+          onChange={(e) => setNewEntry(e.target.value)}
+          placeholder="Écris quelque chose..."
+        />
+        <button onClick={handleAddEntry}>Ajouter</button>
+        <div className="entries">
+          {entries.map((entry, index) => (
+            <div key={index} className="entry">
+              {entry}
+            </div>
+          ))}
+        </div>
       </header>
     </div>
   );

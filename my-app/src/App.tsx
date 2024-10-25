@@ -13,7 +13,7 @@ const App = () => {
       setNewEntry('');
       setPassword('');
     } else {
-      alert('Veuillez saisir une entrée et un mot de passe.');
+      alert('Veuillez saisir un mot de passe.');
     }
   };
 

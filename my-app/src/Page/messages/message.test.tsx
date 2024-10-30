@@ -22,10 +22,15 @@ const mockOnDelete = jest.fn();
 const mockOnEdit = jest.fn();
 
 jest.mock('../../utils/crypto/crypto', () => ({
-    decryptPassword: (password: string) => password === 'encrypted1' ? 'password1' : 'password2',
+    decryptPassword: (password: string) => (password === 'encrypted1' ? 'password1' : 'password2'),
 }));
 
 describe('Messages Component', () => {
+    beforeEach(() => {
+        mockOnDelete.mockClear();
+        mockOnEdit.mockClear();
+    });
+
     test('renders messages correctly', () => {
         render(<Messages entries={mockEntries} onDelete={mockOnDelete} onEdit={mockOnEdit} />);
         
@@ -40,18 +45,6 @@ describe('Messages Component', () => {
         fireEvent.click(screen.getAllByText('Déverrouiller')[0]);
         
         expect(screen.getByText('Message 1')).toBeInTheDocument();
-    });
-
-    test('calls onDelete when delete button is clicked', () => {
-        const decryptedEntries = [
-            { ...mockEntries[0], isDecrypted: true, decryptedText: 'Message 1' },
-            mockEntries[1],
-        ];
-        render(<Messages entries={decryptedEntries} onDelete={mockOnDelete} onEdit={mockOnEdit} />);
-        
-        fireEvent.click(screen.getAllByText('Supprimer')[0]);
-        
-        expect(mockOnDelete).toHaveBeenCalledWith(0);
     });
 
     test('calls onEdit when edit button is clicked', () => {

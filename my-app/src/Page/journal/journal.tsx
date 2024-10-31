@@ -52,7 +52,7 @@ const Journal: React.FC<JournalProps> = ({ entries, setEntries, editIndex, onSav
 
   return (
     <div className="journal">
-      <h1>Journal Intime</h1>
+      <h1>Mon Journal Intime</h1>
       <textarea
         value={newEntry}
         onChange={(e) => setNewEntry(e.target.value)}
